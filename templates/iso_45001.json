@@ -1,0 +1,92 @@
+{
+  "title": "Occupational Health and Safety Management Procedure - ISO 45001",
+  "doc_number": "SOP-ISO45001-001",
+  "standard": "ISO 45001",
+  "description": "OH&S management system requirements and procedures",
+  "metadata": {
+    "category": "Health and Safety",
+    "test_type": "OH&S Procedure"
+  },
+  "sections": [
+    {
+      "title": "Title Page",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Number",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Control",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Purpose",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Scope",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Definitions and Terms",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Responsibilities",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Normative References",
+      "content": "ISO 45001: Occupational health and safety management systems - Requirements with guidance for use",
+      "content_type": "text"
+    },
+    {
+      "title": "OH&S Policy",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Hazard Identification and Risk Assessment",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Legal Requirements",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Procedure Steps",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Incident Investigation",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Emergency Response",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Records",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Appendix",
+      "content": "",
+      "content_type": "text"
+    }
+  ]
+}

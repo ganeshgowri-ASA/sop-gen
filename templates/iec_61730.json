@@ -1,0 +1,82 @@
+{
+  "title": "PV Module Safety Qualification - IEC 61730",
+  "doc_number": "SOP-IEC61730-001",
+  "standard": "IEC 61730",
+  "description": "Safety qualification testing procedure for photovoltaic modules",
+  "metadata": {
+    "category": "Solar PV Safety",
+    "test_type": "Safety Qualification"
+  },
+  "sections": [
+    {
+      "title": "Title Page",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Number",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Control",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Purpose",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Scope",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Definitions and Abbreviations",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Responsibilities",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Normative References",
+      "content": "IEC 61730-1: Requirements for construction\nIEC 61730-2: Requirements for testing",
+      "content_type": "text"
+    },
+    {
+      "title": "HSE Risk Assessment",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Safety Requirements",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Equipment and Materials",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Test Procedure",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Safety Assessment Criteria",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Appendix",
+      "content": "",
+      "content_type": "text"
+    }
+  ]
+}

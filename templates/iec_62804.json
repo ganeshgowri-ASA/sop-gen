@@ -1,0 +1,87 @@
+{
+  "title": "Potential-Induced Degradation (PID) Testing - IEC 62804",
+  "doc_number": "SOP-IEC62804-001",
+  "standard": "IEC 62804",
+  "description": "Test methods for detection of potential-induced degradation in crystalline silicon PV modules",
+  "metadata": {
+    "category": "Solar PV Reliability",
+    "test_type": "PID Testing"
+  },
+  "sections": [
+    {
+      "title": "Title Page",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Number",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Control",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Purpose",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Scope",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Definitions and Abbreviations",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Responsibilities",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Normative References",
+      "content": "IEC 62804 series for PID test methods",
+      "content_type": "text"
+    },
+    {
+      "title": "PID Test Principles",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Equipment and Materials",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Pre-conditioning",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "PID Test Procedure",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Measurement and Analysis",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Pass/Fail Criteria",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Appendix",
+      "content": "",
+      "content_type": "text"
+    }
+  ]
+}

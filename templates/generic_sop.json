@@ -1,0 +1,82 @@
+{
+  "title": "Standard Operating Procedure - Generic Template",
+  "doc_number": "SOP-GENERIC-001",
+  "standard": "Generic",
+  "description": "General purpose SOP template adaptable to any procedure",
+  "metadata": {
+    "category": "General",
+    "test_type": "Generic Procedure"
+  },
+  "sections": [
+    {
+      "title": "Title Page",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Number",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Control",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Purpose",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Scope",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Definitions and Abbreviations",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Responsibilities",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "References",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Materials and Equipment",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Procedure",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Quality Control",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Safety Considerations",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Documentation and Records",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Appendix",
+      "content": "",
+      "content_type": "text"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "title": "Quality Management System Procedure - ISO 9001",
+  "doc_number": "SOP-ISO9001-001",
+  "standard": "ISO 9001",
+  "description": "Quality management system requirements and procedures",
+  "metadata": {
+    "category": "Quality Management",
+    "test_type": "QMS Procedure"
+  },
+  "sections": [
+    {
+      "title": "Title Page",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Number",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Control",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Purpose",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Scope",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Definitions and Terms",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Responsibilities and Authorities",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Normative References",
+      "content": "ISO 9001: Quality management systems - Requirements",
+      "content_type": "text"
+    },
+    {
+      "title": "Quality Objectives",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Process Description",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Procedure Steps",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Monitoring and Measurement",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Nonconformity and Corrective Action",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Records",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Appendix",
+      "content": "",
+      "content_type": "text"
+    }
+  ]
+}
