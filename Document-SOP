@@ -1,0 +1,355 @@
+"""
+Solar PV Reliability Test Lab SOP Generator
+Main Streamlit Application
+Version: 2.0
+Author: Ganesh Gowri
+Date: November 2025
+"""
+
+import streamlit as st
+from streamlit_option_menu import option_menu
+import streamlit.components.v1 as components
+from deep_translator import GoogleTranslator
+from PIL import Image
+import io
+import os
+import json
+from datetime import datetime
+import pandas as pd
+
+# Import custom modules
+from document_generator import SOPDocumentGenerator
+from image_generator import FlowchartGenerator
+from template_manager import TemplateManager, StandardsManager
+
+# ==================== PAGE CONFIGURATION ====================
+st.set_page_config(
+    page_title="Solar PV SOP Generator",
+    page_icon="☀️",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# ==================== CUSTOM CSS ====================
+st.markdown("""
+    <style>
+    .main-header {
+        font-size: 3rem;
+        color: #FF6B35;
+        text-align: center;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .sub-header {
+        font-size: 1.5rem;
+        color: #004E89;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .section-divider {
+        border-top: 3px solid #FFD23F;
+        margin: 20px 0;
+    }
+    .success-box {
+        padding: 20px;
+        background-color: #d4edda;
+        border-left: 5px solid #28a745;
+        border-radius: 5px;
+        margin: 10px 0;
+    }
+    .info-box {
+        padding: 15px;
+        background-color: #cce5ff;
+        border-left: 5px solid #004085;
+        border-radius: 5px;
+        margin: 10px 0;
+    }
+    .stButton>button {
+        background-color: #FF6B35;
+        color: white;
+        font-size: 18px;
+        padding: 10px 24px;
+        border-radius: 8px;
+        border: none;
+        font-weight: bold;
+    }
+    .stButton>button:hover {
+        background-color: #E65A2E;
+        border: 2px solid #004E89;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# ==================== SESSION STATE INITIALIZATION ====================
+if 'generated_doc' not in st.session_state:
+    st.session_state.generated_doc = None
+if 'flowchart_image' not in st.session_state:
+    st.session_state.flowchart_image = None
+if 'template_data' not in st.session_state:
+    st.session_state.template_data = {}
+if 'language_code' not in st.session_state:
+    st.session_state.language_code = 'en'
+
+# ==================== INITIALIZE MANAGERS ====================
+template_mgr = TemplateManager()
+standards_mgr = StandardsManager()
+flowchart_gen = FlowchartGenerator()
+
+# ==================== SIDEBAR ====================
+with st.sidebar:
+    st.image("https://via.placeholder.com/200x100?text=Solar+PV+Lab", use_column_width=True)
+    
+    selected = option_menu(
+        menu_title="Navigation",
+        options=["Home", "Create SOP", "Template Library", "Standards Reference", "Settings"],
+        icons=["house", "file-earmark-plus", "folder", "book", "gear"],
+        menu_icon="cast",
+        default_index=1,
+    )
+    
+    st.markdown("---")
+    
+    # Language Selection
+    st.subheader("🌐 Language Settings")
+    target_language = st.selectbox(
+        "Translate SOP to:",
+        options=[
+            "English", "Hindi", "Tamil", "Telugu", "Gujarati", "Marathi",
+            "Bengali", "Kannada", "Malayalam", "Punjabi", "Odia", "Assamese",
+            "Spanish", "French", "German", "Chinese", "Japanese", "Korean", "Arabic"
+        ],
+        index=0
+    )
+    
+    language_codes = {
+        "English": "en", "Hindi": "hi", "Tamil": "ta", "Telugu": "te",
+        "Gujarati": "gu", "Marathi": "mr", "Bengali": "bn", "Kannada": "kn",
+        "Malayalam": "ml", "Punjabi": "pa", "Odia": "or", "Assamese": "as",
+        "Spanish": "es", "French": "fr", "German": "de", "Chinese": "zh-CN",
+        "Japanese": "ja", "Korean": "ko", "Arabic": "ar"
+    }
+    
+    st.session_state.language_code = language_codes[target_language]
+    
+    st.markdown("---")
+    st.info("💡 **Tip:** Upload templates or select from library for faster SOP creation")
+
+# ==================== TRANSLATION FUNCTION ====================
+def translate_text(text, target_lang_code='en'):
+    """Translate text to target language"""
+    try:
+        if target_lang_code == "en" or not text or text.strip() == "":
+            return text
+        translator = GoogleTranslator(source='auto', target=target_lang_code)
+        return translator.translate(text)
+    except Exception as e:
+        st.warning(f"Translation failed: {e}. Using original text.")
+        return text
+
+# ==================== HOME PAGE ====================
+if selected == "Home":
+    st.markdown('<p class="main-header">☀️ Solar PV Reliability Test Lab SOP Generator</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub-header">Generate Professional Standard Operating Procedures in Minutes</p>', unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("### 📝 Create SOPs")
+        st.write("Generate comprehensive SOPs with all required sections, citations, and formatting")
+        
+    with col2:
+        st.markdown("### 📚 Template Library")
+        st.write("Access pre-built templates for common Solar PV reliability tests")
+        
+    with col3:
+        st.markdown("### 🔬 Standards Reference")
+        st.write("Integrated database of IEC, ASTM, IS, NABL, and other standards")
+    
+    st.markdown("---")
+    
+    st.markdown("### ✨ Key Features:")
+    features = [
+        "✅ Multi-language support (Indian & International languages)",
+        "✅ Auto-generate flowcharts and diagrams using AI",
+        "✅ Upload or select from template library",
+        "✅ Standards validation with automatic citations",
+        "✅ Export to Word, PDF, and Excel formats",
+        "✅ HSE risk assessment integration",
+        "✅ Equipment & materials tracking",
+        "✅ Editable sections with rich text support",
+        "✅ Multi-section media uploads (logos, images, graphs, schematics)",
+        "✅ Equation editor with LaTeX support"
+    ]
+    
+    for feature in features:
+        st.markdown(f"- {feature}")
+    
+    st.markdown("---")
+    st.success("👉 Navigate to **'Create SOP'** from the sidebar to get started!")
+
+# ==================== CREATE SOP PAGE ====================
+elif selected == "Create SOP":
+    st.markdown('<p class="main-header">📝 Create New SOP</p>', unsafe_allow_html=True)
+    st.markdown("---")
+    
+    # Template Selection Option
+    st.subheader("🗂️ Step 1: Choose Template Source")
+    
+    template_option = st.radio(
+        "Select how you want to start:",
+        options=["Start from Scratch", "Use Template Library", "Upload Custom Template"],
+        horizontal=True
+    )
+    
+    if template_option == "Use Template Library":
+        available_templates = template_mgr.list_templates()
+        selected_template = st.selectbox("Select a template:", available_templates)
+        
+        if st.button("Load Template"):
+            st.session_state.template_data = template_mgr.load_template(selected_template)
+            st.success(f"✅ Template '{selected_template}' loaded successfully!")
+    
+    elif template_option == "Upload Custom Template":
+        uploaded_template = st.file_uploader("Upload SOP Template (JSON/DOCX)", type=["json", "docx"])
+        if uploaded_template:
+            st.session_state.template_data = template_mgr.parse_uploaded_template(uploaded_template)
+            st.success("✅ Custom template loaded!")
+    
+    st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+    
+    # Main SOP Form
+    with st.form("sop_generation_form"):
+        st.subheader("📋 Step 2: Document Information")
+        
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            doc_title = st.text_input(
+                "SOP Title*",
+                value=st.session_state.template_data.get('title', ''),
+                placeholder="e.g., Thermal Cycling Test Procedure"
+            )
+            doc_number = st.text_input(
+                "Document Number*",
+                value=st.session_state.template_data.get('doc_number', ''),
+                placeholder="e.g., SOP-PV-TC-001"
+            )
+            revision = st.text_input(
+                "Revision Number",
+                value=st.session_state.template_data.get('revision', 'Rev 1.0')
+            )
+            effective_date = st.date_input("Effective Date", value=datetime.now())
+        
+        with col2:
+            company_name = st.text_input(
+                "Company Name*",
+                value=st.session_state.template_data.get('company', ''),
+                placeholder="e.g., Solar Testing Labs Pvt. Ltd."
+            )
+            division = st.text_input(
+                "Division",
+                value=st.session_state.template_data.get('division', ''),
+                placeholder="e.g., R&D Department"
+            )
+            document_owner = st.text_input(
+                "Document Owner*",
+                value=st.session_state.template_data.get('owner', ''),
+                placeholder="e.g., Dr. Rajesh Kumar"
+            )
+            location = st.text_input("Lab Location", placeholder="e.g., Bangalore, India")
+        
+        with col3:
+            doer = st.text_input(
+                "Prepared By",
+                value=st.session_state.template_data.get('doer', ''),
+                placeholder="Engineer Name"
+            )
+            reviewer = st.text_input(
+                "Reviewed By",
+                value=st.session_state.template_data.get('reviewer', ''),
+                placeholder="Senior Engineer Name"
+            )
+            approver = st.text_input(
+                "Approved By",
+                value=st.session_state.template_data.get('approver', ''),
+                placeholder="Manager Name"
+            )
+            confidentiality = st.selectbox(
+                "Confidentiality Level",
+                ["Public", "Internal", "Confidential", "Restricted"]
+            )
+        
+        st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+        
+        # Test Specification
+        st.subheader("🔬 Step 3: Test Specification")
+        
+        col4, col5 = st.columns(2)
+        
+        with col4:
+            test_name = st.text_input(
+                "Test Name*",
+                value=st.session_state.template_data.get('test_name', ''),
+                placeholder="e.g., Thermal Cycling Test (TC 200)"
+            )
+            test_standard = st.multiselect(
+                "Select Applicable Standard(s)*",
+                options=list(standards_mgr.get_all_standards().keys()),
+                default=st.session_state.template_data.get('standards', [])
+            )
+            test_type = st.selectbox(
+                "Test Type",
+                ["Thermal", "Mechanical", "Electrical", "Environmental", "Performance", "Safety"]
+            )
+        
+        with col5:
+            test_duration = st.text_input(
+                "Test Duration",
+                value=st.session_state.template_data.get('duration', ''),
+                placeholder="e.g., 200 cycles / 48 hours"
+            )
+            test_temperature_range = st.text_input(
+                "Temperature Range (if applicable)",
+                placeholder="e.g., -40°C to +85°C"
+            )
+            sample_size = st.text_input(
+                "Sample Size",
+                placeholder="e.g., 5 modules minimum"
+            )
+        
+        st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+        
+        # SOP Content Sections
+        st.subheader("📝 Step 4: SOP Content Sections")
+        
+        # Create tabs for better organization
+        tab1, tab2, tab3, tab4 = st.tabs(["Core Content", "Procedures", "Analysis", "Additional Info"])
+        
+        with tab1:
+            st.markdown("#### 1. Purpose")
+            purpose = st.text_area(
+                "Purpose (What and Why)",
+                value=st.session_state.template_data.get('purpose', ''),
+                placeholder="This SOP defines the procedure for conducting thermal cycling tests on photovoltaic modules to evaluate their resistance to thermal stress...",
+                height=120,
+                key="purpose"
+            )
+            
+            st.markdown("#### 2. Scope")
+            scope = st.text_area(
+                "Scope (Applicability)",
+                value=st.session_state.template_data.get('scope', ''),
+                placeholder="This procedure applies to all crystalline silicon PV modules tested in accordance with IEC 61215...",
+                height=120,
+                key="scope"
+            )
+            
+            col_def1, col_def2 = st.columns(2)
+            
+            with col_def1:
+                st.markdown("#### 3. Definitions & Abbreviations")
+                definitions = st.text_area(
+                    "Definitions",
+                    value=st.session_state.template
