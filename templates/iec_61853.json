@@ -1,0 +1,87 @@
+{
+  "title": "PV Module Performance Testing - IEC 61853",
+  "doc_number": "SOP-IEC61853-001",
+  "standard": "IEC 61853",
+  "description": "Performance testing and energy rating procedure for photovoltaic modules",
+  "metadata": {
+    "category": "Solar PV Performance",
+    "test_type": "Performance Testing"
+  },
+  "sections": [
+    {
+      "title": "Title Page",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Number",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Control",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Purpose",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Scope",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Definitions and Abbreviations",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Responsibilities",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Normative References",
+      "content": "IEC 61853 series for PV module performance testing and energy rating",
+      "content_type": "text"
+    },
+    {
+      "title": "Test Conditions",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Equipment and Materials",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Performance Measurement Procedure",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Data Analysis and Calculations",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Energy Rating Methodology",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Reporting Requirements",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Appendix",
+      "content": "",
+      "content_type": "text"
+    }
+  ]
+}

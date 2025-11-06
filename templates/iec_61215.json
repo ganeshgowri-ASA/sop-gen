@@ -1,0 +1,102 @@
+{
+  "title": "Photovoltaic Module Testing Procedure - IEC 61215",
+  "doc_number": "SOP-IEC61215-001",
+  "standard": "IEC 61215",
+  "description": "Design qualification and type approval testing for crystalline silicon photovoltaic modules",
+  "metadata": {
+    "category": "Solar PV Testing",
+    "test_type": "Design Qualification"
+  },
+  "sections": [
+    {
+      "title": "Title Page",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Number",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Control",
+      "content": "Document Control Section: Lists authors, reviewers, approvers, and revision history table",
+      "content_type": "text"
+    },
+    {
+      "title": "Purpose",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Scope",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Definitions and Abbreviations",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Responsibilities",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Normative References",
+      "content": "IEC 61215 series standards for PV module design qualification",
+      "content_type": "text"
+    },
+    {
+      "title": "HSE Risk Assessment",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Equipment and Materials",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Sample Preparation",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Facility Preparation",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Test Procedure",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Data Analysis and Requirements",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Pass/Fail Criteria",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Flowchart",
+      "content": "",
+      "content_type": "flowchart"
+    },
+    {
+      "title": "Equipment Images",
+      "content": "",
+      "content_type": "image"
+    },
+    {
+      "title": "Appendix",
+      "content": "",
+      "content_type": "text"
+    }
+  ]
+}

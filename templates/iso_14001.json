@@ -1,0 +1,92 @@
+{
+  "title": "Environmental Management System Procedure - ISO 14001",
+  "doc_number": "SOP-ISO14001-001",
+  "standard": "ISO 14001",
+  "description": "Environmental management system requirements and procedures",
+  "metadata": {
+    "category": "Environmental Management",
+    "test_type": "EMS Procedure"
+  },
+  "sections": [
+    {
+      "title": "Title Page",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Number",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Document Control",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Purpose",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Scope",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Definitions and Terms",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Responsibilities",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Normative References",
+      "content": "ISO 14001: Environmental management systems - Requirements with guidance for use",
+      "content_type": "text"
+    },
+    {
+      "title": "Environmental Policy",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Environmental Aspects",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Legal and Other Requirements",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Procedure Steps",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Monitoring and Measurement",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Emergency Preparedness",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Records",
+      "content": "",
+      "content_type": "text"
+    },
+    {
+      "title": "Appendix",
+      "content": "",
+      "content_type": "text"
+    }
+  ]
+}
