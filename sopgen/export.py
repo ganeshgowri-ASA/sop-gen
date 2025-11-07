@@ -109,6 +109,31 @@ class DocumentExporter:
             # Fallback if markdown2 not available
             html_body = md_text.replace('\n', '<br>\n')
 
+        # Add logo and images sections
+        logo_html = ""
+        if doc.metadata.get('company_logo'):
+            logo_data = doc.metadata['company_logo']
+            if 'base64' in logo_data:
+                logo_html = f'<div style="text-align: center; margin-bottom: 20px;"><img src="data:{logo_data["mime_type"]};base64,{logo_data["base64"]}" style="max-width: 200px;" alt="Company Logo"></div>'
+
+        equipment_html = ""
+        if doc.metadata.get('equipment_photos'):
+            equipment_html = '<h2>Equipment Images</h2><div style="display: flex; flex-wrap: wrap; gap: 20px;">'
+            for photo in doc.metadata['equipment_photos']:
+                if 'base64' in photo:
+                    equipment_html += f'<div><p><strong>{photo["name"]}</strong></p><img src="data:{photo["mime_type"]};base64,{photo["base64"]}" style="max-width: 400px;" alt="{photo["name"]}"></div>'
+            equipment_html += '</div>'
+
+        flowchart_html = ""
+        if doc.metadata.get('flowcharts'):
+            flowchart_html = '<h2>Process Flowcharts</h2><div style="display: flex; flex-wrap: wrap; gap: 20px;">'
+            for flowchart in doc.metadata['flowcharts']:
+                if flowchart['format'] != 'PDF' and 'base64' in flowchart:
+                    flowchart_html += f'<div><p><strong>{flowchart["name"]}</strong></p><img src="data:{flowchart["mime_type"]};base64,{flowchart["base64"]}" style="max-width: 600px;" alt="{flowchart["name"]}"></div>'
+                elif flowchart['format'] == 'PDF':
+                    flowchart_html += f'<p>[PDF Flowchart: {flowchart["name"]}]</p>'
+            flowchart_html += '</div>'
+
         # Wrap in HTML template
         html = f"""<!DOCTYPE html>
 <html>
@@ -182,10 +207,17 @@ class DocumentExporter:
             font-size: 0.9em;
             color: #7f8c8d;
         }}
+        img {{
+            max-width: 100%;
+            height: auto;
+        }}
     </style>
 </head>
 <body>
+    {logo_html}
     {html_body}
+    {equipment_html}
+    {flowchart_html}
 </body>
 </html>"""
         return html
@@ -221,6 +253,25 @@ class DocumentExporter:
             from docx.enum.text import WD_ALIGN_PARAGRAPH
 
             word_doc = WordDocument()
+
+            # Add company logo if available
+            if doc.metadata.get('company_logo'):
+                try:
+                    import base64
+                    logo_data = doc.metadata['company_logo']
+                    if 'base64' in logo_data:
+                        # Decode base64 image
+                        img_bytes = base64.b64decode(logo_data['base64'])
+                        img_stream = io.BytesIO(img_bytes)
+                        # Add logo at the top
+                        logo_para = word_doc.add_paragraph()
+                        logo_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                        logo_run = logo_para.add_run()
+                        logo_run.add_picture(img_stream, width=Inches(2))
+                        word_doc.add_paragraph()  # Add spacing
+                except Exception as e:
+                    # If logo fails, continue without it
+                    pass
 
             # Add title
             title = word_doc.add_heading(doc.title, level=0)
@@ -280,6 +331,55 @@ class DocumentExporter:
 
                 # Add spacing
                 word_doc.add_paragraph()
+
+            # Add equipment photos section if available
+            if doc.metadata.get('equipment_photos'):
+                try:
+                    import base64
+                    word_doc.add_heading('Equipment Images', level=1)
+
+                    equipment_photos = doc.metadata['equipment_photos']
+                    for photo in equipment_photos:
+                        if 'base64' in photo:
+                            # Decode base64 image
+                            img_bytes = base64.b64decode(photo['base64'])
+                            img_stream = io.BytesIO(img_bytes)
+
+                            # Add photo with caption
+                            word_doc.add_paragraph(f"Figure: {photo['name']}")
+                            photo_para = word_doc.add_paragraph()
+                            photo_run = photo_para.add_run()
+                            photo_run.add_picture(img_stream, width=Inches(4))
+                            word_doc.add_paragraph()  # Add spacing
+                except Exception as e:
+                    # If photos fail, continue without them
+                    pass
+
+            # Add flowcharts section if available
+            if doc.metadata.get('flowcharts'):
+                try:
+                    import base64
+                    word_doc.add_heading('Process Flowcharts', level=1)
+
+                    flowcharts = doc.metadata['flowcharts']
+                    for flowchart in flowcharts:
+                        if flowchart['format'] != 'PDF' and 'base64' in flowchart:
+                            # Decode base64 image
+                            img_bytes = base64.b64decode(flowchart['base64'])
+                            img_stream = io.BytesIO(img_bytes)
+
+                            # Add flowchart with caption
+                            word_doc.add_paragraph(f"Flowchart: {flowchart['name']}")
+                            flowchart_para = word_doc.add_paragraph()
+                            flowchart_run = flowchart_para.add_run()
+                            flowchart_run.add_picture(img_stream, width=Inches(5))
+                            word_doc.add_paragraph()  # Add spacing
+                        elif flowchart['format'] == 'PDF':
+                            # For PDFs, just add a reference
+                            word_doc.add_paragraph(f"[PDF Flowchart: {flowchart['name']}]")
+                except Exception as e:
+                    # If flowcharts fail, continue without them
+                    pass
 
             # Add footer
             footer_para = word_doc.add_paragraph()

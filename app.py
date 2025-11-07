@@ -331,6 +331,78 @@ elif page == "📄 Create SOP":
             )
             doc.metadata['standards'] = selected_standards
 
+        # File Upload Section
+        st.markdown("---")
+        st.markdown("### 📎 File Uploads")
+
+        # Initialize file handler in session state
+        if 'file_handler' not in st.session_state:
+            from sopgen.file_handler import FileUploadHandler
+            st.session_state.file_handler = FileUploadHandler()
+
+        upload_col1, upload_col2, upload_col3 = st.columns(3)
+
+        with upload_col1:
+            st.markdown("#### 🏢 Company Logo")
+            logo_file = st.file_uploader(
+                "Upload Logo (PNG/JPG, max 2MB)",
+                type=['png', 'jpg', 'jpeg'],
+                key="logo_upload",
+                help="Upload your company logo to appear on the title page"
+            )
+
+            if logo_file:
+                logo_data = st.session_state.file_handler.process_logo(logo_file)
+                if logo_data:
+                    st.success(f"✅ Logo uploaded: {logo_data['name']}")
+                    st.image(logo_file, width=150)
+                else:
+                    st.error("❌ Logo upload failed")
+
+        with upload_col2:
+            st.markdown("#### 🔧 Equipment Photos")
+            equipment_files = st.file_uploader(
+                "Upload Equipment Photos (Multiple files)",
+                type=['png', 'jpg', 'jpeg'],
+                accept_multiple_files=True,
+                key="equipment_upload",
+                help="Upload photos of equipment used in the SOP"
+            )
+
+            if equipment_files:
+                equipment_data = st.session_state.file_handler.process_equipment_photos(equipment_files)
+                if equipment_data:
+                    st.success(f"✅ {len(equipment_data)} photos uploaded")
+                    # Show thumbnails
+                    for i, photo in enumerate(equipment_data[:3]):  # Show max 3 thumbnails
+                        if i < len(equipment_files):
+                            st.image(equipment_files[i], width=100)
+                else:
+                    st.error("❌ Photo upload failed")
+
+        with upload_col3:
+            st.markdown("#### 📊 Flowchart/Schematic")
+            flowchart_file = st.file_uploader(
+                "Upload Flowchart (PNG/JPG/PDF)",
+                type=['png', 'jpg', 'jpeg', 'pdf'],
+                key="flowchart_upload",
+                help="Upload process flowcharts or schematics"
+            )
+
+            if flowchart_file:
+                flowchart_data = st.session_state.file_handler.process_flowchart(flowchart_file)
+                if flowchart_data:
+                    st.success(f"✅ Flowchart uploaded: {flowchart_data['name']}")
+                    if flowchart_data['format'] != 'PDF':
+                        st.image(flowchart_file, width=150)
+                else:
+                    st.error("❌ Flowchart upload failed")
+
+        # Add uploads to document metadata
+        if st.button("💾 Attach Files to Document"):
+            st.session_state.file_handler.add_images_to_document(doc)
+            st.success("✅ Files attached to document!")
+
         # Step 3: Section Editing
         st.markdown("---")
         st.markdown("## ✍️ Step 3: Edit SOP Sections")
@@ -470,6 +542,35 @@ elif page == "📄 Create SOP":
                         st.error(f"❌ Export error: {e}")
 
             with col_exp2:
+                st.markdown("#### 🌐 Translation")
+
+                # Initialize translator if not exists
+                if 'translator' not in st.session_state:
+                    from sopgen.translation import DocumentTranslator
+                    st.session_state.translator = DocumentTranslator()
+
+                # Language selection for translation
+                target_language = st.selectbox(
+                    "Translate to:",
+                    options=st.session_state.translator.get_supported_languages(),
+                    key="export_translate_lang"
+                )
+
+                if st.button("🌐 Translate Document", use_container_width=True, type="secondary"):
+                    if target_language == "English":
+                        st.info("Document is already in English")
+                    else:
+                        try:
+                            with st.spinner(f"Translating to {target_language}..."):
+                                translated_doc = st.session_state.translator.translate_document(doc, target_language)
+                                st.session_state.current_doc = translated_doc
+                                st.success(f"✅ Document translated to {target_language}!")
+                                st.rerun()
+                        except Exception as e:
+                            st.error(f"❌ Translation error: {e}")
+
+                st.markdown("---")
+
                 st.markdown("#### 💾 Save Document")
 
                 if st.button("💾 Save to Library", use_container_width=True):
@@ -617,6 +718,31 @@ elif page == "⚙️ Settings":
 
     if not openai_key and not anthropic_key:
         st.info("💡 Running in demo mode with mock AI responses. Add API keys for real AI generation.")
+
+    st.markdown("---")
+
+    st.markdown("## 🌐 Language Settings")
+
+    # Initialize translator in session state if not exists
+    if 'translator' not in st.session_state:
+        from sopgen.translation import DocumentTranslator
+        st.session_state.translator = DocumentTranslator()
+
+    # Language selection
+    available_languages = st.session_state.translator.get_supported_languages()
+
+    # Initialize preferred language in session state
+    if 'preferred_language' not in st.session_state:
+        st.session_state.preferred_language = "English"
+
+    st.session_state.preferred_language = st.selectbox(
+        "Default Document Language",
+        options=available_languages,
+        index=available_languages.index(st.session_state.preferred_language),
+        help="Select the default language for document translation"
+    )
+
+    st.info(f"📝 Current language: {st.session_state.preferred_language}")
 
     st.markdown("---")
 

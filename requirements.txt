@@ -26,6 +26,6 @@ pandas>=2.0.0
 python-dateutil>=2.8.2
 python-dotenv>=1.0.0
 
-# Optional: For enhanced functionality
-# Pillow>=10.0.0  # For image processing
-# requests>=2.31.0  # For API calls
+# Phase 1 Enhancement: Translation and File Upload Support
+deep-translator>=1.11.4
+Pillow>=10.0.0
