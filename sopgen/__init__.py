@@ -7,7 +7,7 @@ __version__ = "1.0.0"
 __author__ = "Ganesh Gowri"
 
 from .models import Document, Section, DocumentVersion
-from .templates import TemplateManager
+from .templates import TemplateManager, StandardsManager
 from .generator import AIContentGenerator
 from .export import DocumentExporter
 
@@ -16,6 +16,7 @@ __all__ = [
     'Section',
     'DocumentVersion',
     'TemplateManager',
+    'StandardsManager',
     'AIContentGenerator',
     'DocumentExporter'
 ]
