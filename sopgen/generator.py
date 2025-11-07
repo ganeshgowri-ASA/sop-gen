@@ -7,6 +7,10 @@ import os
 from typing import Dict, Optional
 from .models import Document, Section
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 # API configurations
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
